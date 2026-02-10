@@ -38,7 +38,7 @@ public class PlayerController : MonoBehaviour
         // Find the references to the "Move" and "Jump" actions inside the player input's action map
         // Here I specify "Player/" but it in not required if assigning the action map in PlayerInput inspector.
         InputActionMove = playerInput.actions.FindAction($"Player/Move");
-        InputActionJump = playerInput.actions.FindAction($"Player/Jump");
+        //InputActionJump = playerInput.actions.FindAction($"Player/Jump");
     }
 
     // Assign player number on spawn

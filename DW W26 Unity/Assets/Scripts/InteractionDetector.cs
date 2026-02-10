@@ -11,14 +11,19 @@ public class InteractionDetector : MonoBehaviour
     }
 
     //ask for help
+    //only when held
     public void OnInteract(InputAction.CallbackContext context)
     {
         //checks if action was made 
         if (context.performed)
         {
-            // ?                             .
-            // is an interactable in range, if so Interact
-            interactableInRange?.Interact();
+            if (interactableInRange != null)
+            {
+                interactableInRange.Interact();
+
+                //should write in the debug log... doesnt
+                Debug.Log("Key Tracked");
+            }
         }
     }
 
