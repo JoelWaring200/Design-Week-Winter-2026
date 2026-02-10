@@ -50,13 +50,14 @@ public class PlayerController : MonoBehaviour
     // Runs each frame
     public void Update()
     {
-        // Read the "Jump" action state, which is a boolean value
+        /* Read the "Jump" action state, which is a boolean value
         if (InputActionJump.WasPressedThisFrame())
         {
             // Buffer input becuase I'm controlling the Rigidbody through FixedUpdate
             // and checking there we can miss inputs.
             DoJump = true;
-        }
+            //wont need this
+        }*/
     }
 
     // Runs each phsyics update
@@ -71,18 +72,20 @@ public class PlayerController : MonoBehaviour
         // MOVE
         // Read the "Move" action value, which is a 2D vector
         Vector2 moveValue = InputActionMove.ReadValue<Vector2>();
-        // Here we're only using the X axis to move.
-        float moveForce = moveValue.x * MoveSpeed;
+        // Here we're using both the X and Y axis to move.
+        float xMoveForce = moveValue.x * MoveSpeed;
+        float yMoveForce = moveValue.y * MoveSpeed;
         // Apply fraction of force each frame
-        Rigidbody2D.AddForceX(moveForce, ForceMode2D.Force);
+        Rigidbody2D.AddForceX(xMoveForce, ForceMode2D.Force);
+        Rigidbody2D.AddForceY(yMoveForce, ForceMode2D.Force);
 
-        // JUMP - review Update()
+        /* JUMP - review Update() wont need this
         if (DoJump)
         {
             // Apply all force immediately
             Rigidbody2D.AddForceY(JumpForce, ForceMode2D.Impulse);
             DoJump = false;
-        }
+        }*/
     }
 
     // OnValidate runs after any change in the inspector for this script.
