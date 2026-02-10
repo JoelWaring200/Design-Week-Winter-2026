@@ -21,7 +21,7 @@ public class InteractionDetector : MonoBehaviour
             {
                 interactableInRange.Interact();
 
-                //should write in the debug log... doesnt
+                //should write in the debug log... does
                 Debug.Log("Key Tracked");
             }
         }
