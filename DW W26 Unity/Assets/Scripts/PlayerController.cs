@@ -10,12 +10,11 @@ public class PlayerController : MonoBehaviour
     [field: SerializeField] public float MoveSpeed { get; private set; } = 10f;
     [field: SerializeField] public float JumpForce { get; private set; } = 5f;
 
-    public bool DoJump { get; private set; }
+    
 
     // Player input information
     private PlayerInput PlayerInput;
     private InputAction InputActionMove;
-    private InputAction InputActionJump;
 
     // Assign color value on spawn from main spawner
     public void AssignColor(Color color)

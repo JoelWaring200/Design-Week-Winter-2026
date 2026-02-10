@@ -34,6 +34,8 @@ public class PlayerSpawn : MonoBehaviour
         playerInput.transform.position = SpawnPoints[PlayerCount].position;
         playerInput.transform.rotation = SpawnPoints[PlayerCount].rotation;
         Color color = PlayerColors[PlayerCount];
+        //HOWW????
+
 
         // Increment player count
         PlayerCount++;
