@@ -70,6 +70,7 @@ public class TestScript : MonoBehaviour, IInteractable
         playerController.hasItem = !playerController.hasItem;
         */
     }
+    //2 -6
     private void OnTriggerStay2D(Collider2D collision)
     {
         if (!grabbed)
@@ -80,39 +81,49 @@ public class TestScript : MonoBehaviour, IInteractable
                 Vector3 newPos = new Vector3(-12, transform.position.y, transform.position.z);
                 
                 transform.position = newPos; 
-                Debug.Log("dropoff zone");
+                
             }
             if (collision.gameObject.name == "DropOffRight")
             {
-                Vector3 newPos = new Vector3(12, transform.position.y, transform.position.z);
+                Vector3 newPos = new Vector3(14, transform.position.y, transform.position.z);
                 
                 transform.position = newPos; 
-                Debug.Log("dropoff zone");
+                
+            }
+            //conveyor pos fixes
+            if (collision.gameObject.name == "ConveyorFixTop")
+            {
+                Vector3 newPos = new Vector3(transform.position.x, 2, transform.position.z);
+                transform.position = newPos;
+            }
+            if (collision.gameObject.name == "ConveyorFixBottom")
+            {
+                Vector3 newPos = new Vector3(transform.position.x, -6, transform.position.z);
+                transform.position = newPos;
             }
             //conveyor belts
             if (collision.gameObject.name == "ConveyorUp")
             {
                 float speed = 2f;
                 transform.position += Vector3.up * speed * Time.deltaTime;
-                Debug.Log("on conveyor");
             }
             if (collision.gameObject.name == "ConveyorLeft")
             {
                 float speed = 2f;
                 transform.position += Vector3.left * speed * Time.deltaTime;
-                Debug.Log("on conveyor");
+
             }
             if (collision.gameObject.name == "ConveyorDown")
             {
                 float speed = 2f;
                 transform.position += Vector3.down * speed * Time.deltaTime;
-                Debug.Log("on conveyor");
+
             }
             if (collision.gameObject.name == "ConveyorRight")
             {
                 float speed = 2f;
                 transform.position += Vector3.right * speed * Time.deltaTime;
-                Debug.Log("on conveyor");
+
             }
         }
     }
