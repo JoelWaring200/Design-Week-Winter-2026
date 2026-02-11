@@ -1,14 +1,16 @@
 using UnityEngine;
 using UnityEngine.InputSystem;
+using System.Collections.Generic;
 
 public class PlayerSpawn : MonoBehaviour
 {
     [field: SerializeField] public Transform[] SpawnPoints { get; private set; }
     [field: SerializeField] public Color[] PlayerColors { get; private set; }
     public int PlayerCount { get; private set; }
-
+    public List<GameObject> playerList = new List<GameObject>{};
     public void OnPlayerJoined(PlayerInput playerInput)
     {
+        Debug.Log($"Player joined");
         int maxPlayerCount = Mathf.Min(SpawnPoints.Length, PlayerColors.Length);
         if (maxPlayerCount < 1)
         {
@@ -34,6 +36,8 @@ public class PlayerSpawn : MonoBehaviour
         playerInput.transform.position = SpawnPoints[PlayerCount].position;
         playerInput.transform.rotation = SpawnPoints[PlayerCount].rotation;
         Color color = PlayerColors[PlayerCount];
+        //add playerinput to array for player
+        //playerList.Add(playerInput.gameObject);
         //HOWW????
 
 

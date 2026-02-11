@@ -11,7 +11,6 @@ public class PlayerController : MonoBehaviour
     [field: SerializeField] public float JumpForce { get; private set; } = 5f;
 
     
-    public bool hasItem = false;
     // Player input information
     private PlayerInput PlayerInput;
     private InputAction InputActionMove;
