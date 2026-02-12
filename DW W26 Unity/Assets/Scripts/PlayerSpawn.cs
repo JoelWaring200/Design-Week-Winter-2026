@@ -34,8 +34,13 @@ public class PlayerSpawn : MonoBehaviour
         playerInput.transform.position = SpawnPoints[PlayerCount].position;
         playerInput.transform.rotation = SpawnPoints[PlayerCount].rotation;
         Color color = PlayerColors[PlayerCount];
+<<<<<<< Updated upstream
         //HOWW????
+=======
+>>>>>>> Stashed changes
 
+        //add playerinput to array for player
+        playerList.Add(playerInput.gameObject);
 
         // Increment player count
         PlayerCount++;

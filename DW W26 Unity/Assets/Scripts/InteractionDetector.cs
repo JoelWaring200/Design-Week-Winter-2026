@@ -19,10 +19,7 @@ public class InteractionDetector : MonoBehaviour
         {
             if (interactableInRange != null)
             {
-                interactableInRange.Interact();
-
-                //should write in the debug log... does
-                Debug.Log("Key Tracked");
+                interactableInRange.Interact(gameObject);
             }
         }
     }

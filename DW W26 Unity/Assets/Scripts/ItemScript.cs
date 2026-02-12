@@ -3,6 +3,7 @@ using UnityEngine;
 public class TestScript : MonoBehaviour, IInteractable
 {
 
+<<<<<<< Updated upstream
     public bool isGone;
     public bool grabbed = false;
     /*
@@ -11,18 +12,29 @@ public class TestScript : MonoBehaviour, IInteractable
     */
     GameObject target;
     GameObject interactionIcon;
+=======
+    //public bool grabbed = false;
+    float speed = 2f;
+    private PlayerSpawn playerSpawnRef;
+    private GameObject holder = null;
+>>>>>>> Stashed changes
 
     //SpriteRenderer sr;
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     
     void Start()
     {
+<<<<<<< Updated upstream
         interactionIcon.SetActive(false);
+=======
+        playerSpawnRef = GameObject.Find("Player Input Manager").GetComponent<PlayerSpawn>();
+>>>>>>> Stashed changes
     } 
 
     // Update is called once per frame
     void Update()
     {
+<<<<<<< Updated upstream
         //if (playerController.hasItem == false)
         {
             if (grabbed)
@@ -44,6 +56,17 @@ public class TestScript : MonoBehaviour, IInteractable
             {
                 return;
             }
+=======
+        if (holder != null)
+        {
+            GetComponent<SpriteRenderer>().sortingOrder = 2;
+
+            transform.position = holder.transform.position;
+        }
+        else
+        {
+            GetComponent<SpriteRenderer>().sortingOrder = 0;
+>>>>>>> Stashed changes
         }
         /*
         fix the way the player is tracked
@@ -58,8 +81,9 @@ public class TestScript : MonoBehaviour, IInteractable
 
     public bool CanInteract()
     {
-        return !isGone;
+        return holder == null;
     }
+<<<<<<< Updated upstream
 
     public void Interact()
     {
@@ -69,11 +93,23 @@ public class TestScript : MonoBehaviour, IInteractable
         fix the way the player is tracked
         playerController.hasItem = !playerController.hasItem;
         */
+=======
+    public void Interact(GameObject interactor)
+    {
+        if (holder == null)
+        {
+            holder = interactor;
+        }
+        else if (holder == interactor)
+        {
+            holder = null;
+        }
+>>>>>>> Stashed changes
     }
     //2 -6
     private void OnTriggerStay2D(Collider2D collision)
     {
-        if (!grabbed)
+        if (holder == null)
         {
             //dropoffs
             if (collision.gameObject.name == "DropOffLeft")
