@@ -1,94 +1,65 @@
 using UnityEngine;
 
-public class TestScript : MonoBehaviour, IInteractable
+public class ItemScript : MonoBehaviour, IInteractable
 {
 
-    public bool isGone;
-    public bool grabbed = false;
-    /*
-    fix the way player is tracked
-    PlayerController playerController;
-    */
-    GameObject target;
-    GameObject interactionIcon;
+    float speed = 2f;
+    private PlayerSpawn playerSpawnRef;
+    GameObject holder = null;
 
     //SpriteRenderer sr;
     // Start is called once before the first execution of Update after the MonoBehaviour is created
-    
     void Start()
     {
-        interactionIcon.SetActive(false);
+        playerSpawnRef = GameObject.Find("Player Input Manager").GetComponent<PlayerSpawn>();
     } 
-
     // Update is called once per frame
     void Update()
     {
-        //if (playerController.hasItem == false)
-        {
-            if (grabbed)
-            {
-                GetComponent<SpriteRenderer>().sortingOrder = 2;
-                Vector3 newPos = new Vector3(target.transform.position.x, target.transform.position.y, transform.position.z);
-                transform.position = newPos; 
-            }
-        }
 
-        //Replace this
-        if (target == null)
+        if (holder != null)
         {
-            if (GameObject.FindGameObjectWithTag("Player"))
-            {
-                target = GameObject.FindGameObjectWithTag("Player");
-            } 
-            else
-            {
-                return;
-            }
+            GetComponent<SpriteRenderer>().sortingOrder = 2;
+
+
+            transform.position = holder.transform.position;
         }
-        /*
-        fix the way the player is tracked
-        if (target != null && assigning )
+        else
         {
-            playerController = target.GetComponent<PlayerController>(); 
+            GetComponent<SpriteRenderer>().sortingOrder = 0;
         }
-        */
     }
-
-     
 
     public bool CanInteract()
     {
-        return !isGone;
+        return holder == null;
     }
-
-    public void Interact()
+    public void Interact(GameObject interactor)
     {
-        if(!CanInteract()) return;
-        grabbed = !grabbed;
-        /*
-        fix the way the player is tracked
-        playerController.hasItem = !playerController.hasItem;
-        */
+        if (holder == null)
+        {
+            holder = interactor;
+        }
+
+        else if (holder == interactor)
+        {
+            holder = null;
+        }
     }
-    //2 -6
     private void OnTriggerStay2D(Collider2D collision)
     {
-        if (!grabbed)
+        if (holder == null)
         {
             //dropoffs
             if (collision.gameObject.name == "DropOffLeft")
             {
                 Vector3 newPos = new Vector3(-12, transform.position.y, transform.position.z);
-                
                 transform.position = newPos; 
-                
             }
             if (collision.gameObject.name == "DropOffRight")
             {
-                Vector3 newPos = new Vector3(14, transform.position.y, transform.position.z);
-                
+                Vector3 newPos = new Vector3(14, transform.position.y, transform.position.z);      
                 transform.position = newPos; 
-                
             }
             //conveyor pos fixes
             if (collision.gameObject.name == "ConveyorFixTop")
@@ -104,26 +75,19 @@ public class TestScript : MonoBehaviour, IInteractable
             //conveyor belts
             if (collision.gameObject.name == "ConveyorUp")
             {
-                float speed = 2f;
                 transform.position += Vector3.up * speed * Time.deltaTime;
             }
             if (collision.gameObject.name == "ConveyorLeft")
             {
-                float speed = 2f;
                 transform.position += Vector3.left * speed * Time.deltaTime;
-
             }
             if (collision.gameObject.name == "ConveyorDown")
             {
-                float speed = 2f;
                 transform.position += Vector3.down * speed * Time.deltaTime;
-
             }
             if (collision.gameObject.name == "ConveyorRight")
             {
-                float speed = 2f;
                 transform.position += Vector3.right * speed * Time.deltaTime;
-
             }
         }
     }
