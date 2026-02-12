@@ -89,6 +89,16 @@ public class ItemScript : MonoBehaviour, IInteractable
             {
                 transform.position += Vector3.right * speed * Time.deltaTime;
             }
+            if(collision.gameObject.name == "FactoryLeft")
+            {
+                if(this.gameObject.tag == "RightItemLeft")
+                {
+                    //change pos
+                    Debug.Log("AAAAA");
+
+                }
+            }
+            
         }
     }
     
