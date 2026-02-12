@@ -88,44 +88,8 @@ public class PlayerController : MonoBehaviour
         if (xMoveForce == 0 && yMoveForce == 0)
         {
             Animator.SetBool("isIdle", true);
-            Animator.SetBool("walkR", false);
-            Animator.SetBool("walkU", false);
-            Animator.SetBool("walkL", false);
-            Animator.SetBool("walkD", false);
         }
-        else
-        {
-            Animator.SetBool("isIdle", false);
-        }
-
-        if (xMoveForce + 0.01 > yMoveForce && xMoveForce > 0)
-        {
-            Animator.SetBool("walkR", true);
-            Animator.SetBool("walkU", false);
-            Animator.SetBool("walkL", false);
-            Animator.SetBool("walkD", false);
-        }
-        else if (yMoveForce > xMoveForce && yMoveForce > 0)
-        { 
-            Animator.SetBool("walkU", true);
-            Animator.SetBool("walkR", false);
-            Animator.SetBool("walkL", false);
-            Animator.SetBool("walkD", false);
-        }
-        else if (xMoveForce - 0.01 < yMoveForce && xMoveForce < 0)
-        {
-            Animator.SetBool("walkL", true);
-            Animator.SetBool("walkR", false);
-            Animator.SetBool("walkU", false);
-            Animator.SetBool("walkD", false);
-        }
-        else if (yMoveForce < xMoveForce && yMoveForce < 0)
-        {
-            Animator.SetBool("walkD", true);
-            Animator.SetBool("walkR", false);
-            Animator.SetBool("walkU", false);
-            Animator.SetBool("walkL", false);
-        }
+        else if (xMoveForce == 0 && yMoveForce == 0);
         /* JUMP - review Update() wont need this
         if (DoJump)
         {
