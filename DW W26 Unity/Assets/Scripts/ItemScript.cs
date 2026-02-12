@@ -3,61 +3,52 @@ using UnityEngine;
 public class ItemScript : MonoBehaviour, IInteractable
 {
 
-    public bool isGone;
-    public bool grabbed = false;
     float speed = 2f;
     private PlayerSpawn playerSpawnRef;
-
-    public bool foundPlayer = false;
-    GameObject target;
-    GameObject interactionIcon;
-    public GameObject[] Players;
+    GameObject holder = null;
 
     //SpriteRenderer sr;
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
-        //interactionIcon.SetActive(false);
         playerSpawnRef = GameObject.Find("Player Input Manager").GetComponent<PlayerSpawn>();
     } 
     // Update is called once per frame
     void Update()
     {
 
-        if (playerSpawnRef.PlayerCount == 2)
-        {
-            foundPlayer = true;
-        }
-        //comment out
-        if (playerSpawnRef.PlayerCount > 0 && !foundPlayer)
-        {
-            foundPlayer = true;
-        }
-        if (grabbed)
+        if (holder != null)
         {
             GetComponent<SpriteRenderer>().sortingOrder = 2;
-            Vector3 newPos = new Vector3(target.transform.position.x, target.transform.position.y, transform.position.z);
-            transform.position = newPos; 
+
+
+            transform.position = holder.transform.position;
         }
-        //Replace this
-        if (foundPlayer)
+        else
         {
-            target = GameObject.FindGameObjectWithTag("Player");
+            GetComponent<SpriteRenderer>().sortingOrder = 0;
         }
     }
 
     public bool CanInteract()
     {
-        return !isGone;
+        return holder == null;
     }
-    public void Interact()
+    public void Interact(GameObject interactor)
     {
-        if(!CanInteract()) return;
-        grabbed = !grabbed;
+        if (holder == null)
+        {
+            holder = interactor;
+        }
+
+        else if (holder == interactor)
+        {
+            holder = null;
+        }
     }
     private void OnTriggerStay2D(Collider2D collision)
     {
-        if (!grabbed)
+        if (holder == null)
         {
             //dropoffs
             if (collision.gameObject.name == "DropOffLeft")
