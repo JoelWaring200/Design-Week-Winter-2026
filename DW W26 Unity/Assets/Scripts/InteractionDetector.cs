@@ -19,9 +19,9 @@ public class InteractionDetector : MonoBehaviour
         {
             if (interactableInRange != null)
             {
-                interactableInRange.Interact();
+                interactableInRange.Interact(gameObject);
 
-                //should write in the debug log... doesnt
+                //should write in the debug log... does
                 Debug.Log("Key Tracked");
             }
         }
@@ -29,11 +29,14 @@ public class InteractionDetector : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        //checks if collison is an interactable object
-        if(collision.TryGetComponent(out IInteractable interactable) && interactable.CanInteract())
+        if (interactableInRange == null)
         {
-            interactableInRange = interactable;
-            interactionIcon.SetActive(true);
+            //checks if collison is an interactable object
+            if(collision.TryGetComponent(out IInteractable interactable) && interactable.CanInteract())
+            {
+                interactableInRange = interactable;
+                interactionIcon.SetActive(true);
+            }
         }
     }
     private void OnTriggerExit2D(Collider2D collision)
