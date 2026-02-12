@@ -14,7 +14,7 @@ GameObject:
   - component: {fileID: 5753449342614363191}
   - component: {fileID: 5098492987667397575}
   m_Layer: 0
-  m_Name: SquareItem
+  m_Name: SquareHeadItem
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
