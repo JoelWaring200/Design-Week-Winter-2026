@@ -16,6 +16,10 @@ public class PlayerController : MonoBehaviour
     private InputAction InputActionMove;
 
     // Assign color value on spawn from main spawner
+    public void Start()
+    {
+        Animator = GetComponent<Animator>();
+    }
     public void AssignColor(Color color)
     {
         // record color
@@ -27,6 +31,8 @@ public class PlayerController : MonoBehaviour
         else
             SpriteRenderer.color = color;
     }
+
+    public Animator Animator;
 
     // Set up player input
     public void AssignPlayerInputDevice(PlayerInput playerInput)
@@ -77,6 +83,47 @@ public class PlayerController : MonoBehaviour
         Rigidbody2D.AddForceX(xMoveForce, ForceMode2D.Force);
         Rigidbody2D.AddForceY(yMoveForce, ForceMode2D.Force);
 
+        if (xMoveForce == 0 && yMoveForce == 0)
+        {
+            Animator.SetBool("isIdle", true);
+            Animator.SetBool("walkR", false);
+            Animator.SetBool("walkU", false);
+            Animator.SetBool("walkL", false);
+            Animator.SetBool("walkD", false);
+        }
+        else
+        {
+            Animator.SetBool("isIdle", false);
+        }
+
+        if (xMoveForce + 0.01 > yMoveForce && xMoveForce > 0)
+        {
+            Animator.SetBool("walkR", true);
+            Animator.SetBool("walkU", false);
+            Animator.SetBool("walkL", false);
+            Animator.SetBool("walkD", false);
+        }
+        else if (yMoveForce > xMoveForce && yMoveForce > 0)
+        { 
+            Animator.SetBool("walkU", true);
+            Animator.SetBool("walkR", false);
+            Animator.SetBool("walkL", false);
+            Animator.SetBool("walkD", false);
+        }
+        else if (xMoveForce - 0.01 < yMoveForce && xMoveForce < 0)
+        {
+            Animator.SetBool("walkL", true);
+            Animator.SetBool("walkR", false);
+            Animator.SetBool("walkU", false);
+            Animator.SetBool("walkD", false);
+        }
+        else if (yMoveForce < xMoveForce && yMoveForce < 0)
+        {
+            Animator.SetBool("walkD", true);
+            Animator.SetBool("walkR", false);
+            Animator.SetBool("walkU", false);
+            Animator.SetBool("walkL", false);
+        }
         /* JUMP - review Update() wont need this
         if (DoJump)
         {
