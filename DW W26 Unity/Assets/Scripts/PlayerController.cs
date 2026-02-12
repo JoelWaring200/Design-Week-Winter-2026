@@ -18,6 +18,10 @@ public class PlayerController : MonoBehaviour
     private InputAction InputActionJump;
 
     // Assign color value on spawn from main spawner
+    public void Start()
+    {
+        Animator = GetComponent<Animator>();
+    }
     public void AssignColor(Color color)
     {
         // record color
@@ -29,6 +33,8 @@ public class PlayerController : MonoBehaviour
         else
             SpriteRenderer.color = color;
     }
+
+    public Animator Animator;
 
     // Set up player input
     public void AssignPlayerInputDevice(PlayerInput playerInput)
@@ -79,6 +85,11 @@ public class PlayerController : MonoBehaviour
         Rigidbody2D.AddForceX(xMoveForce, ForceMode2D.Force);
         Rigidbody2D.AddForceY(yMoveForce, ForceMode2D.Force);
 
+        if (xMoveForce == 0 && yMoveForce == 0)
+        {
+            Animator.SetBool("isIdle", true);
+        }
+        else if (xMoveForce == 0 && yMoveForce == 0);
         /* JUMP - review Update() wont need this
         if (DoJump)
         {
