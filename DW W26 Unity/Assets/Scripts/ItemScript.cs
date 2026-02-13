@@ -89,6 +89,47 @@ public class ItemScript : MonoBehaviour, IInteractable
             {
                 transform.position += Vector3.right * speed * Time.deltaTime;
             }
+            if(collision.gameObject.name == "FactoryLeftHitBox")
+            {
+                if(this.gameObject.tag == "RightItemLeft")
+                {
+                    if(this.gameObject.name == "HexHead")
+                    {
+                        Destroy(gameObject);
+                        Debug.Log("aaaaaaa");
+                    }
+                    if(this.gameObject.name == "TriangleArm")
+                    {
+                        Destroy(gameObject);
+                        Debug.Log("aaaaaaa");
+                    }
+                    if(this.gameObject.name == "TriangleLeg")
+                    {
+                        Destroy(gameObject);
+                        Debug.Log("aaaaaaa");
+                    }
+                    Debug.Log("aaaaaaaaaaaaaa");
+                }
+                Debug.Log("aaaa");
+            }
+            if(collision.gameObject.name == "FactoryRightHitBox")
+            {
+                if(this.gameObject.tag == "RightItemRight")
+                {
+                    if(this.gameObject.name == "SquareBody")
+                    {
+
+                    }
+                    if(this.gameObject.name == "CircleLeg")
+                    {
+
+                    }
+                    if(this.gameObject.name == "CircleArm")
+                    {
+                        
+                    }
+                }
+            }
         }
     }
     
