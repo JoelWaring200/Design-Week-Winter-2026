@@ -7,15 +7,50 @@ public class ItemScript : MonoBehaviour, IInteractable
     private PlayerSpawn playerSpawnRef;
     GameObject holder = null;
 
+
+    GameObject legLeftItem;
+    SpriteRenderer legLeftItemSr;
+    GameObject headLeftItem;
+    SpriteRenderer headLeftItemSr;
+    GameObject armLeftItem;
+    SpriteRenderer armLeftItemSr;
+    GameObject legRightItem;
+    SpriteRenderer legRightItemSr;
+    GameObject armRightItem;
+    SpriteRenderer armRightItemSr;
+    GameObject bodyRightItem;
+    SpriteRenderer bodyRightItemSr;
     //SpriteRenderer sr;
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
         playerSpawnRef = GameObject.Find("Player Input Manager").GetComponent<PlayerSpawn>();
-    } 
+        //left leg
+        legLeftItem = GameObject.Find("legLeft");
+        legLeftItemSr = legLeftItem.GetComponent<SpriteRenderer>();
+        //left head
+        headLeftItem = GameObject.Find("headLeft");
+        headLeftItemSr = headLeftItem.GetComponent<SpriteRenderer>();
+        //left arm
+        armLeftItem = GameObject.Find("armLeft");
+        armLeftItemSr = armLeftItem.GetComponent<SpriteRenderer>();
+        //right leg
+        legRightItem = GameObject.Find("legRight");
+        legRightItemSr = legRightItem.GetComponent<SpriteRenderer>();
+        //right body
+        bodyRightItem = GameObject.Find("bodyRight");
+        bodyRightItemSr = bodyRightItem.GetComponent<SpriteRenderer>();
+        //right arm
+        armRightItem = GameObject.Find("armRight");
+        armRightItemSr = armRightItem.GetComponent<SpriteRenderer>();
+    }
     // Update is called once per frame
     void Update()
     {
+        if (legLeftItemSr == null)
+        {
+            Debug.Log("what the fuck");
+        }
 
         if (holder != null)
         {
@@ -54,12 +89,12 @@ public class ItemScript : MonoBehaviour, IInteractable
             if (collision.gameObject.name == "DropOffLeft")
             {
                 Vector3 newPos = new Vector3(-12, transform.position.y, transform.position.z);
-                transform.position = newPos; 
+                transform.position = newPos;
             }
             if (collision.gameObject.name == "DropOffRight")
             {
-                Vector3 newPos = new Vector3(14, transform.position.y, transform.position.z);      
-                transform.position = newPos; 
+                Vector3 newPos = new Vector3(14, transform.position.y, transform.position.z);
+                transform.position = newPos;
             }
             //conveyor pos fixes
             if (collision.gameObject.name == "ConveyorFixTop")
@@ -89,48 +124,57 @@ public class ItemScript : MonoBehaviour, IInteractable
             {
                 transform.position += Vector3.right * speed * Time.deltaTime;
             }
-            if(collision.gameObject.name == "FactoryLeftHitBox")
+            //factory checks
+            if (collision.gameObject.name == "FactoryLeftHitBox")
             {
-                if(this.gameObject.tag == "RightItemLeft")
+                if (this.gameObject.tag == "RightItemLeft")
                 {
-                    if(this.gameObject.name == "HexHead")
+                    if (this.gameObject.name == "HexHead")
                     {
                         Destroy(gameObject);
-                        Debug.Log("aaaaaaa");
+                        FactoryManager.instance.FactoryHeadLeft = true;
+                        headLeftItemSr.sortingOrder = 2;
                     }
-                    if(this.gameObject.name == "TriangleArm")
+                    if (this.gameObject.name == "TriangleArm")
                     {
                         Destroy(gameObject);
-                        Debug.Log("aaaaaaa");
+                        FactoryManager.instance.FactoryArmLeft = true;
+                        armLeftItemSr.sortingOrder = 2;
                     }
-                    if(this.gameObject.name == "TriangleLeg")
+                    if (this.gameObject.name == "TriangleLeg")
                     {
                         Destroy(gameObject);
-                        Debug.Log("aaaaaaa");
+                        FactoryManager.instance.FactoryLegLeft = true;
+                        legLeftItemSr.sortingOrder = 2;
                     }
-                    Debug.Log("aaaaaaaaaaaaaa");
                 }
-                Debug.Log("aaaa");
+
             }
-            if(collision.gameObject.name == "FactoryRightHitBox")
+            if (collision.gameObject.name == "FactoryRightHitBox")
             {
-                if(this.gameObject.tag == "RightItemRight")
+                if (this.gameObject.tag == "RightItemRight")
                 {
-                    if(this.gameObject.name == "SquareBody")
+                    if (this.gameObject.name == "SquareBody")
                     {
-
+                        Destroy(gameObject);
+                        FactoryManager.instance.FactoryBodyRight = true;
+                        bodyRightItemSr.sortingOrder = 2;
                     }
-                    if(this.gameObject.name == "CircleLeg")
+                    if (this.gameObject.name == "CircleArm")
                     {
-
+                        Destroy(gameObject);
+                        FactoryManager.instance.FactoryArmRight = true;
+                        armRightItemSr.sortingOrder = 2;
                     }
-                    if(this.gameObject.name == "CircleArm")
+                    if (this.gameObject.name == "CircleLeg")
                     {
-                        
+                        Destroy(gameObject);
+                        FactoryManager.instance.FactoryLegRight = true;
+                        legRightItemSr.sortingOrder = 2;
                     }
                 }
             }
         }
     }
-    
+
 }
