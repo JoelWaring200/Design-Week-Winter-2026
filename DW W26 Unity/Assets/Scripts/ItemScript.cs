@@ -8,23 +8,27 @@ public class ItemScript : MonoBehaviour, IInteractable
     GameObject holder = null;
 
 
-    GameObject legLeftItem;
+    [SerializeField]GameObject legLeftItem;
     SpriteRenderer legLeftItemSr;
-    GameObject headLeftItem;
+    [SerializeField]GameObject headLeftItem;
     SpriteRenderer headLeftItemSr;
-    GameObject armLeftItem;
+    [SerializeField]GameObject armLeftItem;
     SpriteRenderer armLeftItemSr;
-    GameObject legRightItem;
+    [SerializeField]GameObject legRightItem;
     SpriteRenderer legRightItemSr;
-    GameObject armRightItem;
+    [SerializeField]GameObject armRightItem;
     SpriteRenderer armRightItemSr;
-    GameObject bodyRightItem;
+    [SerializeField]GameObject bodyRightItem;
     SpriteRenderer bodyRightItemSr;
     //SpriteRenderer sr;
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
         playerSpawnRef = GameObject.Find("Player Input Manager").GetComponent<PlayerSpawn>();
+        //changed to serialized field so it can be added in the inspector instead
+        //(easier for bug fixing)
+
+        /*
         //left leg
         legLeftItem = GameObject.Find("legLeft");
         legLeftItemSr = legLeftItem.GetComponent<SpriteRenderer>();
@@ -43,13 +47,14 @@ public class ItemScript : MonoBehaviour, IInteractable
         //right arm
         armRightItem = GameObject.Find("armRight");
         armRightItemSr = armRightItem.GetComponent<SpriteRenderer>();
+        */
     }
     // Update is called once per frame
     void Update()
     {
-        if (legLeftItemSr == null)
+        //if (legLeftItemSr == null)
         {
-            Debug.Log("what the fuck");
+            //Debug.Log("what the fuck");
         }
 
         if (holder != null)
@@ -133,19 +138,19 @@ public class ItemScript : MonoBehaviour, IInteractable
                     {
                         Destroy(gameObject);
                         FactoryManager.instance.FactoryHeadLeft = true;
-                        headLeftItemSr.sortingOrder = 2;
+                        //headLeftItemSr.sortingOrder = 2;
                     }
                     if (this.gameObject.name == "TriangleArm")
                     {
                         Destroy(gameObject);
                         FactoryManager.instance.FactoryArmLeft = true;
-                        armLeftItemSr.sortingOrder = 2;
+                        //armLeftItemSr.sortingOrder = 2;
                     }
                     if (this.gameObject.name == "TriangleLeg")
                     {
                         Destroy(gameObject);
                         FactoryManager.instance.FactoryLegLeft = true;
-                        legLeftItemSr.sortingOrder = 2;
+                        //legLeftItemSr.sortingOrder = 2;
                     }
                 }
 
@@ -158,19 +163,19 @@ public class ItemScript : MonoBehaviour, IInteractable
                     {
                         Destroy(gameObject);
                         FactoryManager.instance.FactoryBodyRight = true;
-                        bodyRightItemSr.sortingOrder = 2;
+                        //bodyRightItemSr.sortingOrder = 2;
                     }
                     if (this.gameObject.name == "CircleArm")
                     {
                         Destroy(gameObject);
                         FactoryManager.instance.FactoryArmRight = true;
-                        armRightItemSr.sortingOrder = 2;
+                        //armRightItemSr.sortingOrder = 2;
                     }
                     if (this.gameObject.name == "CircleLeg")
                     {
                         Destroy(gameObject);
                         FactoryManager.instance.FactoryLegRight = true;
-                        legRightItemSr.sortingOrder = 2;
+                        //legRightItemSr.sortingOrder = 2;
                     }
                 }
             }

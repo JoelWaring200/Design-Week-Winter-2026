@@ -8,6 +8,9 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/Dual Monitor Scene.unity
     guid: bc7044024238fb841bd4db6b21830fdd
+  - enabled: 1
+    path: Assets/Scenes/WinScene.unity
+    guid: e0d0204f30739624bad48e9f02d425f6
   m_configObjects:
     com.unity.input.settings.actions: {fileID: -944628639613478452, guid: 2bcd2660ca9b64942af0de543d8d7100, type: 3}
   m_UseUCBPForAssetBundles: 0

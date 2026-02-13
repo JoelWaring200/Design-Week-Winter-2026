@@ -1,5 +1,5 @@
 using UnityEngine;
-
+using UnityEngine.SceneManagement;
 public class FactoryManager : MonoBehaviour
 {
     public static FactoryManager instance;
