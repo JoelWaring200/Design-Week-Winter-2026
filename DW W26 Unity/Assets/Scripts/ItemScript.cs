@@ -53,9 +53,9 @@ public class ItemScript : MonoBehaviour, IInteractable
     void Update()
     {
         //if (legLeftItemSr == null)
-        {
+        //{
             //Debug.Log("what the fuck");
-        }
+        //}
 
         if (holder != null)
         {
